@@ -22,7 +22,7 @@ try:
         byte_array = line.encode() # make sure getting a byte array
         md5.update(byte_array)
 
-    # Write the binary digest values
+    # Write the binary digest values --> if you made a text file, use .hexdigest
     hashtag_handle.write(md5.digest())
 
     # Re-read from the beginning to verify

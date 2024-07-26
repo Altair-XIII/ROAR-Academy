@@ -13,7 +13,7 @@ def rotationMatrix(degree):
     return np.array([[c, -s], [s, c]])
 
 v1 = np.array([[1.,3.]]).T     # Another notation for transpose
-rotation_matrix = rotationMatrix(45)
+rotation_matrix = rotationMatrix(45) # This is 45 degrees COUNTERCLOCKWISE
 
 v2 = rotation_matrix.dot(v1)
 
