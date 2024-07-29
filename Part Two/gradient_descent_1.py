@@ -1,9 +1,3 @@
-## This is course material for Introduction to Python Scientific Programming
-## Example code: gradient_descent.py
-## Author: Allen Y. Yang
-##
-## (c) Copyright 2020. Intelligent Racing Inc. Not permitted for commercial use
-
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
@@ -47,17 +41,20 @@ def grad(aa):
 aa = np.array([-4, 4])
 delta = np.inf
 epsilon = 0.001
-learn_rate = 0.01
+learn_rate = 0.5
 step_count = 0
 ax2.scatter(aa[0], aa[1], penalty(aa[0],aa[1]), c='b', s=100, marker='*')
 # Update vector aa
 while delta > epsilon:
     # Gradient Descent
-    aa_next = aa - learn_rate * grad(aa)
+    aa_next = aa - learn_rate * grad(aa) # the next point aa_next is the original point moved in the 
+    # direction opposite to the gradient, scaled by the learn_rate/lambda
+
     # Plot the animation
     ax2.plot([aa[0],aa_next[0]],[aa[1], aa_next[1]],\
         [penalty(aa[0],aa[1]), penalty(aa_next[0],aa_next[1]) ], 'ko-')
-    delta = np.linalg.norm(aa - aa_next)
+    
+    delta = np.linalg.norm(aa - aa_next) # delta is the change from aa to aa_next
     aa = aa_next
     step_count +=1
     fig.canvas.draw_idle()
@@ -67,3 +64,22 @@ print('Optimal result: ', aa)
 ax2.scatter(aa[0], aa[1], penalty(aa[0],aa[1]), c='b', s=100, marker='*')
 plt.show()
 print('Step Count:', step_count)
+
+"""
+ANSWERS TO EXERCISE:
+
+1. Slow convergence
+learn_rate = 0.01 
+Step Count: 385
+Optimal result:  [ 1.9831048  -0.70655287]
+
+2. Slow convergence
+learn_rate = 0.05
+Step Count: 110
+Optimal result:  [ 2.04536612 -0.97813716]
+
+
+3. Oscillation/divergence
+learn_rate = 1
+
+"""

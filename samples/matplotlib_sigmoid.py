@@ -13,8 +13,8 @@ def sigmoid(x):
 x = np.arange(-10., 10., 0.2)
 sig = sigmoid(x)
 
-fig = plt.figure()
-ax1 = fig.add_subplot(1, 3, 1)
+fig = plt.figure() # generate a figure, a window
+ax1 = fig.add_subplot(1, 3, 1) # make a sublot with rows, columns, and index of the subplot ur making (1 for first subplot)
 # Plot without customization
 plt.plot(x,sig, linewidth = 3)
 
@@ -31,7 +31,7 @@ plt.plot(x,sig, linewidth = 3)
 ax3 = fig.add_subplot(1,3,3)
 # Move left y-axis to centre
 ax3.spines['left'].set_position('center')
-ax3.spines['bottom'].set_position(('data',0))
+ax3.spines['bottom'].set_position(('data',0)) # intersects at y = 0
 # Eliminate upper and right axes
 ax3.spines['right'].set_color('none')
 ax3.spines['top'].set_color('none')

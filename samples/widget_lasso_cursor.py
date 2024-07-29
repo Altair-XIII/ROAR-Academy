@@ -32,9 +32,10 @@ cursor = Cursor(ax2,
 def onclick(event):
 	[x1, y1] = [event.xdata, event.ydata]
 	print(x1, y1)
-	plt.plot(x1,y1, 'ro')
+	plt.plot(x1,y1, 'ro') # plot a red dot "ro"
 	fig2.canvas.draw_idle()
     
-fig2.canvas.mpl_connect('button_press_event', onclick)
+fig2.canvas.mpl_connect('button_press_event', onclick) # if the button is pressed, run the onclick function
+
 
 plt.show()

@@ -1,10 +1,3 @@
-## This is course material for Introduction to Python Scientific Programming
-## Example code: read_image.py
-## Author: Allen Y. Yang
-##
-## (c) Copyright 2020. Intelligent Racing Inc. Not permitted for commercial use
-
-# Please do <pip3 install matplotlib> and <pip3 install pillow> first
 from matplotlib import image
 from matplotlib import pyplot
 import os
@@ -19,7 +12,6 @@ flag_filename = flag_path + '/' + 'japan_flag.png'
 flag_data = image.imread(flag_filename)
 print(flag_data.shape)
 
-# Add some color boundaries to modify an image array
 plot_lenna_data = lenna_data.copy()
 for width in range(1, flag_data.shape[1]):
     for height in range(1, flag_data.shape[0]):

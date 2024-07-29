@@ -56,3 +56,4 @@ A_inverse = np.linalg.inv(A)
 x = A_inverse@b
 print(x)
 print(np.linalg.solve(A,b))
+

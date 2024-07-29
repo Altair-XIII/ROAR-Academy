@@ -17,6 +17,7 @@ for page in pdfReader.pages:
     page_text = page_text.replace("https://www.fulltextarchive.com", "")
     page_text = page_text.replace("--", " ")
     page_text = page_text.translate(str.maketrans("", "", string.punctuation + "0123456789"))
+    # You could also remove the word if a character is not in the alphabet
     page_text = page_text.replace("Full Text Archive", "")
     page_text = page_text.replace("CHAPTER", "")
 

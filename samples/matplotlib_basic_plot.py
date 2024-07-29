@@ -11,13 +11,13 @@ import numpy as np
 x = np.arange(0,2*np.pi,0.1)
 
 # Create a sin function sample
-y0 = np.sin(x)
+y0 = np.sin(x) # takes the sin of all values of x 
 plt.plot(x, y0, color = 'r', linewidth = 3)
 
 # Create a dash cos function sample
 y1 = np.cos(x)
-plt.plot(x, y1, 'b--', linewidth = 1)
+plt.plot(x, y1, 'b--D', linewidth = 1) # make marker a diamond
 plt.ylim(-1, 1)
 plt.xlim(0,2*np.pi)
-plt.xticks(np.arange(0,2*np.pi,np.pi/4), ['0', 'pi/4', 'pi/2', '3pi/4', 'pi', '5pi/4', '3pi/2', '7pi/4'])
+plt.xticks(np.arange(0, 2*np.pi, np.pi/4), ['0', 'pi/4', 'pi/2', '3pi/4', 'pi', '5pi/4', '3pi/2', '7pi/4'])
 plt.show()
