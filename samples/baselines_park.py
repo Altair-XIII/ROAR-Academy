@@ -14,12 +14,13 @@ import numpy as np
 
 from stable_baselines3 import HerReplayBuffer, SAC, DDPG, TD3
 
-env = gym.make("parking-v0", render_mode='human')
+env = gym.make("parking-v0", render_mode='human') # initialize parking environment 
 
 # Create 4 artificial transitions per real transition
 n_sampled_goal = 4
 
-# SAC hyperparams:
+# Intialize SAC model
+# SAC hyperparameterss:
 model = SAC('MultiInputPolicy', env, replay_buffer_class=HerReplayBuffer, 
             replay_buffer_kwargs=dict(
               n_sampled_goal=n_sampled_goal,
@@ -39,7 +40,7 @@ if LOAD_PRETRAINED:
   # Load saved model
   model = SAC.load(model_file_name, env=env)
 else:
-  model.learn(int(2e5))
+  model.learn(int(2e5)) # trains the model 2e5 times
   model.save(model_file_name)
 
 obs, info = env.reset()
