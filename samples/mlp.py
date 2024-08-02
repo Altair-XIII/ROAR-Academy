@@ -23,7 +23,20 @@ def toy_2D_samples(x_bias ,linearSeparableFlag):
         samples1 = np.random.multivariate_normal([5+x_bias, 0], [[1, 0],[0, 1]], 100)
         samples2 = np.random.multivariate_normal([-5+x_bias, 0], [[1, 0],[0, 1]], 100)
 
-        samples = np.concatenate((samples1, samples2 ), axis =0)
+        """
+        np.random.multivariate_normal() 
+        1st arg --> mean vector: the point around which the other points will center
+        2nd arg --> covariance matrix: defines how spread out the data points are
+        - 2x2 matrix bc we have to dimensions, x and y
+        - The 1s in our example mean the data is spread out around the mean w/ a std deviation of 1 
+        - The 0s in our example mean there is no correlation btw the dimensions
+         --> i.e. the spread of points in the x-direction does not affect the spread in the y-direction
+        3rd arg --> number of samples/size
+
+        Thus each sample here is a 2D array w/ 100 rows and 2 columns (for the 2 dimensions, x & y)
+        """
+
+        samples = np.concatenate((samples1, samples2 ), axis =0) # so here it would have 200 rows and 2 columns
     
         # Plot the data
         plt.plot(samples1[:, 0], samples1[:, 1], 'bo')
@@ -45,21 +58,21 @@ def toy_2D_samples(x_bias ,linearSeparableFlag):
         plt.plot(samples4[:, 0], samples4[:, 1], 'rx')
         plt.show()
 
-    label1 = np.array([[1, 0]])
+    label1 = np.array([[1, 0]]) # labels for each class
     label2 = np.array([[0, 1]])
-    labels1 = np.repeat(label1, 100, axis = 0)
+    labels1 = np.repeat(label1, 100, axis = 0) # makes 100 rows of label1 --> [1, 0]
     labels2 = np.repeat(label2, 100, axis = 0)
-    labels = np.concatenate((labels1, labels2 ), axis =0)
+    labels = np.concatenate((labels1, labels2 ), axis =0) # puts together array w/ 200 rows, each w/ one label
     return samples, labels
 
 samples, labels = toy_2D_samples(x_bias ,linearSeparableFlag)
 
 # Split training and testing set
-
-randomOrder = np.random.permutation(200)
-trainingX = samples[randomOrder[0:100], :]
+randomOrder = np.random.permutation(200) # generates a 1D array w/ random permutations of integers 0–199
+# E.g. could be [ 23, 45, 89, 10, 5, ..., 193, 178]
+trainingX = samples[randomOrder[0:100], :] # randomly splits some samples & correct labels as "training" data
 trainingY = labels[randomOrder[0:100], :]
-testingX = samples[randomOrder[100:200], :]
+testingX = samples[randomOrder[100:200], :] # witholds the rest for "testing" on
 testingY = labels[randomOrder[100:200], :]
 
 model = Sequential()
@@ -74,7 +87,8 @@ model.fit(trainingX, trainingY, epochs=500, batch_size=10, verbose=1, validation
 score = 0
 for i in range(100):
     predict_x=model.predict(np.array([testingX[i,:]])) 
-    estimate=np.argmax(predict_x,axis=1)
+    estimate=np.argmax(predict_x,axis=1) 
+    # Gets the index of the highest probability in the prediction, which corresponds to the predicted class.
 
     if testingY[i,estimate] == 1:
         score = score  + 1

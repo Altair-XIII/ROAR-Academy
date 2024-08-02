@@ -9,6 +9,7 @@ from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
+from keras.utils import to_categorical
 import matplotlib.pyplot as plt
 
 batch_size = 128
@@ -25,8 +26,8 @@ img_rows, img_cols = 28, 28
 print(y_train[0:20])
 plt.figure(1)
 for i in range(20):
-    plt.subplot(2,10,i+1)
-    plt.imshow(x_train[i], cmap = plt.cm.binary)
+    plt.subplot(2, 10, i + 1)
+    plt.imshow(x_train[i], cmap=plt.cm.binary)
 plt.show()
 
 x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
@@ -45,16 +46,20 @@ print(x_train.shape[0], 'train samples')
 print(x_test.shape[0], 'test samples')
 
 # convert class vectors to binary class matrices
-y_train = keras.utils.np_utils.to_categorical(y_train, num_classes)
-y_test = keras.utils.np_utils.to_categorical(y_test, num_classes)
+y_train = to_categorical(y_train, num_classes)
+y_test = to_categorical(y_test, num_classes)
 
 # CNN is created also using Sequential model
 model = Sequential()
+# Original image 28 x 28 x 1
 model.add(Conv2D(32, kernel_size=(5, 5),
                  activation='relu',
                  input_shape=input_shape))
+# 24 x 24 x 32
 model.add(MaxPooling2D(pool_size=(2, 2)))
+# 12 x 12 x 32
 model.add(Conv2D(64, kernel_size=(5, 5), activation='relu'))
+
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Flatten())
 model.add(Dropout(0.5))

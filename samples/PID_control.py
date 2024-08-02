@@ -115,7 +115,9 @@ class Vehicle2D(object):
 
 vehicle = Vehicle2D()
 vehicle.set(0, 1, 0)
-vehicle.set_steering_drift(10/180.*np.pi)
+vehicle.set_steering_drift(10/180.*np.pi) 
+# systematic error --> makes us need I-control
+# if you set this to zero --> we won't need I-control, bc the vehicle will be 100% accurate 
 
 track_length = 1000
 targets = []; track_x = []; track_y = []
@@ -126,6 +128,7 @@ for i in range(300,600):
 for i in range(600,track_length):
     targets.append([i, 0]); track_x.append(i); track_y.append(0)
 
+# Set the parameters for K_p, K_d, and K_i
 K_p = 0.2; K_d = 3; K_i = 0.0005
 x_trajectory, y_trajectory = vehicle.run_PID(targets, K_p, K_d, K_i, track_length)  
 n = len(x_trajectory)
